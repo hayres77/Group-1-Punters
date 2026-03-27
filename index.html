@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group 1 Punters 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1a5c2a;--green-light:#2d8a42;--green-dark:#0f3a1a;--gold:#c9a84c;--gold-light:#e8c96d;--cream:#f5f0e8;--off-white:#faf8f3;--charcoal:#1a1a1a;--mid:#444;--muted:#888;--border:rgba(0,0,0,0.1);--card:#fff;--radius:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--charcoal);min-height:100vh}
+.header{background:var(--green-dark);color:#fff;padding:0 1.5rem}
+.header-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;flex-wrap:wrap;gap:1rem}
+.brand{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;letter-spacing:-0.5px;color:#fff}
+.brand span{color:var(--gold-light)}
+.brand-sub{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:2px}
+.fund-pill{background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4);border-radius:20px;padding:6px 16px;text-align:center}
+.fund-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+.fund-amount{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--gold-light)}
+.nav{background:var(--green);overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex}
+.nav-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.6);background:none;border:none;border-bottom:3px solid transparent;padding:0.875rem 1.25rem;cursor:pointer;white-space:nowrap;transition:all 0.15s}
+.nav-btn:hover{color:#fff}
+.nav-btn.active{color:var(--gold-light);border-bottom-color:var(--gold-light)}
+.main{max-width:1000px;margin:0 auto;padding:1.5rem}
+.section{display:none}.section.active{display:block}
+.stats-banner{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.stat-cell{background:var(--card);padding:1rem;text-align:center}
+.stat-cell.featured{background:linear-gradient(135deg,var(--green-dark),var(--green))}
+.stat-label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.stat-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--charcoal)}
+.stat-cell.featured .stat-label{color:rgba(255,255,255,0.6)}
+.stat-cell.featured .stat-val{color:var(--gold-light)}
+.lb-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.lb-table th{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:0.75rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--off-white)}
+.lb-table td{padding:0.875rem 1rem;border-bottom:1px solid rgba(0,0,0,0.05);font-size:0.9rem;vertical-align:middle}
+.lb-table tr:last-child td{border-bottom:none}
+.lb-table tr.leader td{background:rgba(201,168,76,0.06)}
+.lb-table tr:hover td{background:rgba(0,0,0,0.02)}
+.rank-circle{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:0.82rem;flex-shrink:0}
+.r1{background:var(--gold);color:#fff}.r2{background:#aaa;color:#fff}.rn{background:#eee;color:var(--muted)}
+.big-return{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--green)}
+.profit-pos{color:var(--green);font-weight:600;font-size:0.85rem}
+.profit-neg{color:#c0392b;font-weight:600;font-size:0.85rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:0.75rem;color:var(--green-dark)}
+.section-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--charcoal);margin-bottom:0.25rem}
+.section-sub{font-size:0.83rem;color:var(--muted);margin-bottom:1.25rem}
+.field-group{display:flex;flex-direction:column;gap:4px;margin-bottom:0.875rem}
+.field-label{font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600}
+.inp{background:var(--off-white);border:1px solid var(--border);border-radius:6px;color:var(--charcoal);font-family:'DM Sans',sans-serif;font-size:0.9rem;padding:8px 12px;width:100%;transition:border-color 0.15s}
+.inp:focus{outline:none;border-color:var(--green)}
+.sel{background:var(--off-white);border:1px solid var(--border);color:var(--charcoal);font-family:'DM Sans',sans-serif;font-size:0.88rem;padding:7px 28px 7px 10px;border-radius:6px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;background-color:var(--off-white)}
+.sel option{background:#fff}
+.btn{font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:600;background:var(--green);color:#fff;border:none;padding:9px 22px;border-radius:6px;cursor:pointer;transition:background 0.15s;letter-spacing:0.3px}
+.btn:hover{background:var(--green-light)}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:var(--gold-light);color:var(--charcoal)}
+.btn-outline{background:none;border:1px solid var(--border);color:var(--mid);font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;padding:8px 18px;border-radius:6px;cursor:pointer}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+.btn-sm{padding:6px 14px;font-size:0.82rem}
+.al{border-radius:6px;padding:0.7rem 1rem;font-size:0.85rem;margin-bottom:0.75rem}
+.al-s{background:#eaf7ed;border:1px solid #b8e0c0;color:#1a5c2a}
+.al-w{background:#fef9ec;border:1px solid #f0d88a;color:#7a5c00}
+.al-e{background:#fdf0f0;border:1px solid #f0b8b8;color:#8b1a1a}
+.al-info{background:#eef4ff;border:1px solid #b8cff0;color:#1a3a7a}
+.race-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.race-header{background:var(--green-dark);color:#fff;padding:0.875rem 1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.race-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700}
+.race-meta{font-size:0.75rem;color:rgba(255,255,255,0.6);letter-spacing:0.5px}
+.race-body{padding:1rem 1.25rem}
+.chip{display:inline-block;font-size:0.68rem;font-weight:600;letter-spacing:0.5px;padding:2px 8px;border-radius:10px}
+.chip-open{background:#eaf7ed;color:#1a5c2a}
+.chip-lock{background:#fdf0f0;color:#8b1a1a}
+.chip-settled{background:#eef4ff;color:#1a3a7a}
+.runner-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;margin-bottom:1rem}
+.runner-btn{padding:8px 12px;border:1.5px solid var(--border);border-radius:6px;background:var(--off-white);cursor:pointer;text-align:left;transition:all 0.15s;font-family:'DM Sans',sans-serif}
+.runner-btn:hover{border-color:var(--green);background:#f0f7f1}
+.runner-btn.selected{border-color:var(--green);background:#eaf7ed}
+.runner-name{font-size:0.88rem;font-weight:600;color:var(--charcoal)}
+.runner-barrier{font-size:0.72rem;color:var(--muted)}
+.runner-scratched{opacity:0.4;pointer-events:none;text-decoration:line-through}
+.bet-controls{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;padding-top:0.75rem;border-top:1px solid var(--border)}
+.bet-type-btns{display:flex;gap:4px}
+.bet-type-btn{padding:5px 12px;border:1px solid var(--border);border-radius:4px;background:var(--off-white);font-size:0.8rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--mid)}
+.bet-type-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
+.stake-wrap{display:flex;align-items:center;gap:6px;margin-left:auto}
+.stake-inp{width:80px;background:var(--off-white);border:1px solid var(--border);border-radius:6px;color:var(--charcoal);font-family:'DM Sans',sans-serif;font-size:0.9rem;padding:5px 8px;text-align:center}
+.stake-inp:focus{outline:none;border-color:var(--green)}
+.budget-bar{background:var(--off-white);border:1px solid var(--border);border-radius:8px;padding:0.875rem 1rem;margin-bottom:1rem}
+.budget-track{background:#e0e0e0;border-radius:4px;height:8px;margin-top:6px;overflow:hidden}
+.budget-fill{height:100%;border-radius:4px;transition:width 0.3s;background:var(--green)}
+.budget-fill.over{background:#c0392b}
+.podium{display:flex;gap:0.5rem;margin-bottom:0.75rem;flex-wrap:wrap}
+.podium-place{background:var(--off-white);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:0.85rem}
+.podium-place strong{color:var(--green-dark)}
+.admin-section{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.admin-title{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:0.875rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.form-grid.three{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:560px){.form-grid,.form-grid.three{grid-template-columns:1fr}.lb-table th:nth-child(4),.lb-table td:nth-child(4),.lb-table th:nth-child(6),.lb-table td:nth-child(6){display:none}}
+.loading{text-align:center;padding:2rem;color:var(--muted);font-size:0.9rem}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid #e0e0e0;border-top-color:var(--green);border-radius:50%;animation:sp 0.8s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <div class="brand">GROUP 1 <span>PUNTERS</span></div>
+      <div class="brand-sub">Australia · Full Season 2026/27</div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+      <div class="fund-pill">
+        <div class="fund-label">Social Fund</div>
+        <div class="fund-amount" id="socialFund">$0</div>
+      </div>
+      <div class="fund-pill">
+        <div class="fund-label">Prize Pool</div>
+        <div class="fund-amount" id="totalPool">$0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showTab('leaderboard',this)">Leaderboard</button>
+    <button class="nav-btn" onclick="showTab('betting',this)">Place Bets</button>
+    <button class="nav-btn" onclick="showTab('results',this)">Results</button>
+    <button class="nav-btn" onclick="showTab('register',this)">Join</button>
+    <button class="nav-btn" onclick="showTab('rules',this)">Rules</button>
+    <button class="nav-btn" onclick="showTab('admin',this)">Admin</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- LEADERBOARD -->
+<div id="leaderboard" class="section active">
+  <div class="stats-banner">
+    <div class="stat-cell"><div class="stat-label">Race Days</div><div class="stat-val" id="raceDaysCount">0</div></div>
+    <div class="stat-cell featured" style="grid-column:span 2"><div class="stat-label">Leader</div><div class="stat-val" id="leaderName">—</div><div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:2px" id="leaderReturn"></div></div>
+    <div class="stat-cell"><div class="stat-label">Prize</div><div class="stat-val" style="color:var(--gold)">$1,000</div></div>
+    <div class="stat-cell"><div class="stat-label">Entry/Day</div><div class="stat-val">$20</div></div>
+  </div>
+  <div class="section-title">Season Leaderboard</div>
+  <div class="section-sub">Ranked by total virtual returns across all Group 1 race days</div>
+  <div id="lbContent"><div class="loading"><span class="spin"></span>Loading leaderboard...</div></div>
+</div>
+
+<!-- BETTING -->
+<div id="betting" class="section">
+  <div class="section-title">Place Your Bets</div>
+  <div class="section-sub">$100 virtual budget per race day · Must allocate exactly $100 · Win / Place / Each Way</div>
+  <div style="display:flex;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;align-items:flex-end">
+    <div class="field-group" style="margin:0;flex:1;min-width:150px">
+      <label class="field-label">Your name</label>
+      <select class="sel" id="bettorSel" onchange="loadBettingDay()" style="width:100%">
+        <option value="">— select name —</option>
+      </select>
+    </div>
+    <div class="field-group" style="margin:0">
+      <label class="field-label">PIN</label>
+      <input type="password" class="inp" id="bettorPin" placeholder="4-digit PIN" maxlength="4" style="width:110px" oninput="loadBettingDay()">
+    </div>
+    <div class="field-group" style="margin:0;flex:1;min-width:150px">
+      <label class="field-label">Race day</label>
+      <select class="sel" id="raceDaySel" onchange="loadBettingDay()" style="width:100%">
+        <option value="">— select race day —</option>
+      </select>
+    </div>
+  </div>
+  <div id="bettingMsg"></div>
+  <div id="budgetBar" style="display:none" class="budget-bar">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:0.78rem;font-weight:600;color:var(--mid)">Budget allocated</span>
+      <span style="font-size:0.88rem;font-weight:600"><span id="budgetUsed">$0</span> / $100</span>
+    </div>
+    <div class="budget-track"><div class="budget-fill" id="budgetFill" style="width:0%"></div></div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:4px">Remaining: <span id="budgetLeft" style="font-weight:600;color:var(--green)">$100</span> — must allocate exactly $100</div>
+  </div>
+  <div id="bettingRaces"><div style="font-size:0.85rem;color:var(--muted)">Select your name, PIN and a race day to see today's Group 1s.</div></div>
+  <div id="bettingActions" style="display:none;margin-top:1rem">
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
+      <button class="btn" onclick="saveBets()">Lock In Bets</button>
+      <button class="btn-outline" onclick="loadBettingDay()">Refresh</button>
+      <span style="font-size:0.82rem;color:var(--muted);margin-left:auto">Bets lock at jump time of each race</span>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results" class="section">
+  <div class="section-title">Results</div>
+  <div style="display:flex;gap:0.75rem;margin-bottom:1rem;align-items:flex-end;flex-wrap:wrap">
+    <div class="field-group" style="margin:0">
+      <label class="field-label">Race day</label>
+      <select class="sel" id="resultsRaceDaySel" onchange="loadResults()">
+        <option value="">— select race day —</option>
+      </select>
+    </div>
+    <div class="field-group" style="margin:0">
+      <label class="field-label">Filter by player</label>
+      <select class="sel" id="resultsBettorSel" onchange="loadResults()">
+        <option value="">— all players —</option>
+      </select>
+    </div>
+  </div>
+  <div id="resultsContent"><div style="font-size:0.85rem;color:var(--muted)">Select a race day to view results.</div></div>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="section">
+  <div class="section-title">Join the Comp</div>
+  <div class="section-sub">Create your account to start punting · $20 entry per race day</div>
+  <div class="card" style="max-width:400px">
+    <div class="field-group">
+      <label class="field-label">Your name</label>
+      <input class="inp" id="regName" placeholder="e.g. Hammo">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Choose a 4-digit PIN</label>
+      <input class="inp" id="regPin" type="password" maxlength="4" placeholder="e.g. 1234">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Confirm PIN</label>
+      <input class="inp" id="regPin2" type="password" maxlength="4" placeholder="Same PIN again">
+    </div>
+    <button class="btn" onclick="registerPlayer()" style="width:100%;margin-top:0.5rem">Create Account</button>
+    <div id="regMsg" style="font-size:0.85rem;margin-top:0.75rem;display:none"></div>
+  </div>
+  <div class="al al-info" style="max-width:400px">Your 4-digit PIN protects your bets — no one else can bet under your name without it.</div>
+</div>
+
+<!-- RULES -->
+<div id="rules" class="section">
+  <div class="section-title">How It Works</div>
+  <div class="section-sub">Group 1 Punters · Full season 2026/27 · All Australian Group 1s</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.75rem;margin-bottom:1.25rem">
+    <div class="card"><div class="card-title">Virtual bankroll</div><p style="font-size:0.88rem;color:var(--mid);line-height:1.6">Every race day with a Group 1, you get <strong>$100 virtual</strong> to bet. You must allocate exactly $100 across all Group 1s that day — not a dollar more or less.</p></div>
+    <div class="card"><div class="card-title">Bet types</div><p style="font-size:0.88rem;color:var(--mid);line-height:1.6"><strong>Win</strong> — horse must finish 1st<br><strong>Place</strong> — horse must finish top 3<br><strong>Each Way</strong> — half stake win, half stake place</p></div>
+    <div class="card"><div class="card-title">Returns</div><p style="font-size:0.88rem;color:var(--mid);line-height:1.6">All returns use <strong>TAB Starting Price (SP)</strong> after the race. Win = stake × SP win odds. Place = stake × SP place odds.</p></div>
+    <div class="card"><div class="card-title">Entry fee</div><p style="font-size:0.88rem;color:var(--mid);line-height:1.6"><strong>$20 per race day</strong> with Group 1 racing. ~38 race days per season = ~$760 total entry per player.</p></div>
+    <div class="card"><div class="card-title">Prizes</div><p style="font-size:0.88rem;color:var(--mid);line-height:1.6"><strong>Winner takes $1,000.</strong> Highest total virtual returns across the full season wins. All remaining pool goes to the social fund.</p></div>
+    <div class="card"><div class="card-title">Social fund</div><p style="font-size:0.88rem;color:var(--mid);line-height:1.6">All entry fees minus the $1,000 prize split equally across all couples at season end for one big group event.</p></div>
+  </div>
+  <div class="al al-info"><strong>Missing a race day:</strong> Score $0 for that day if no bets placed before first jump.<br><strong>Tie-breaking:</strong> Most individual race day wins → most Group 1 winners backed.</div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin" class="section">
+  <div class="section-title">Admin</div>
+  <div class="section-sub">Add race days, fields and enter results</div>
+  <div id="adminLock" class="card" style="max-width:380px">
+    <div style="font-size:0.88rem;color:var(--mid);margin-bottom:0.75rem">Enter admin password</div>
+    <div style="display:flex;gap:0.75rem;align-items:center">
+      <input type="password" class="inp" id="adminPass" placeholder="Password" style="flex:1">
+      <button class="btn" onclick="checkAdmin()">Enter</button>
+    </div>
+    <div id="adminPassMsg" style="font-size:0.8rem;color:#8b1a1a;margin-top:0.5rem;display:none">Incorrect password</div>
+  </div>
+  <div id="adminContent" style="display:none">
+
+    <div class="admin-section">
+      <div class="admin-title">Add Race Day</div>
+      <div class="form-grid">
+        <div class="field-group" style="margin:0"><label class="field-label">Race day name</label><input class="inp" id="rdName" placeholder="e.g. Caulfield Cup Day"></div>
+        <div class="field-group" style="margin:0"><label class="field-label">Venue</label><input class="inp" id="rdVenue" placeholder="e.g. Caulfield"></div>
+        <div class="field-group" style="margin:0"><label class="field-label">Date</label><input class="inp" type="date" id="rdDate"></div>
+      </div>
+      <button class="btn btn-sm" onclick="saveRaceDay()">Add Race Day</button>
+      <div id="rdMsg" style="font-size:0.83rem;margin-top:0.5rem;display:none"></div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-title">Add Group 1 Race</div>
+      <div class="form-grid">
+        <div class="field-group" style="margin:0"><label class="field-label">Race day</label><select class="sel" id="raceRaceDaySel" style="width:100%"><option value="">— select race day —</option></select></div>
+        <div class="field-group" style="margin:0"><label class="field-label">Race name</label><input class="inp" id="raceName" placeholder="e.g. Caulfield Cup"></div>
+        <div class="field-group" style="margin:0"><label class="field-label">Race number</label><input class="inp" type="number" id="raceNum" placeholder="e.g. 8" min="1" max="12"></div>
+        <div class="field-group" style="margin:0"><label class="field-label">Jump time (AEST)</label><input class="inp" type="datetime-local" id="raceJump"></div>
+      </div>
+      <button class="btn btn-sm" onclick="saveRace()">Add Race</button>
+      <div id="raceMsg" style="font-size:0.83rem;margin-top:0.5rem;display:none"></div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-title">Add Runners to a Race</div>
+      <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem;flex-wrap:wrap;align-items:flex-end">
+        <div class="field-group" style="margin:0;flex:1;min-width:160px"><label class="field-label">Race day</label><select class="sel" id="runnerRaceDaySel" style="width:100%" onchange="loadRacesForRunners()"><option value="">— select —</option></select></div>
+        <div class="field-group" style="margin:0;flex:1;min-width:160px"><label class="field-label">Race</label><select class="sel" id="runnerRaceSel" style="width:100%"><option value="">— select —</option></select></div>
+      </div>
+      <div id="runnerRows">
+        <div class="runner-row" style="display:grid;grid-template-columns:60px 1fr 1fr auto;gap:0.5rem;align-items:center;margin-bottom:0.5rem">
+          <input class="inp" placeholder="No." type="number" min="1" max="24">
+          <input class="inp" placeholder="Horse name">
+          <input class="inp" placeholder="Jockey">
+          <button class="btn-outline btn-sm" onclick="this.closest('.runner-row').remove()">✕</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:0.5rem">
+        <button class="btn-outline btn-sm" onclick="addRunnerRow()">+ Add runner</button>
+        <button class="btn btn-sm" onclick="saveRunners()">Save runners</button>
+      </div>
+      <div id="runnerMsg" style="font-size:0.83rem;margin-top:0.5rem;display:none"></div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-title">Enter Result & SP Odds</div>
+      <div style="display:flex;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;align-items:flex-end">
+        <div class="field-group" style="margin:0;flex:1;min-width:160px"><label class="field-label">Race day</label><select class="sel" id="resultRaceDaySel" style="width:100%" onchange="loadRacesForResults()"><option value="">— select —</option></select></div>
+        <div class="field-group" style="margin:0;flex:1;min-width:160px"><label class="field-label">Race</label><select class="sel" id="resultRaceSel" style="width:100%" onchange="showResultForm()"><option value="">— select —</option></select></div>
+      </div>
+      <div id="resultForm" style="display:none">
+        <div class="form-grid three" style="margin-bottom:0.75rem">
+          <div class="field-group" style="margin:0"><label class="field-label">1st place</label><input class="inp" id="res1st" placeholder="Winning horse"></div>
+          <div class="field-group" style="margin:0"><label class="field-label">2nd place</label><input class="inp" id="res2nd" placeholder="2nd horse"></div>
+          <div class="field-group" style="margin:0"><label class="field-label">3rd place</label><input class="inp" id="res3rd" placeholder="3rd horse"></div>
+        </div>
+        <div class="form-grid" style="margin-bottom:0.875rem">
+          <div class="field-group" style="margin:0"><label class="field-label">Winner SP Win odds</label><input class="inp" id="resSpWin" placeholder="e.g. 4.50" type="number" step="0.01"></div>
+          <div class="field-group" style="margin:0"><label class="field-label">Winner SP Place odds</label><input class="inp" id="resSpPlace" placeholder="e.g. 1.90" type="number" step="0.01"></div>
+        </div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.5rem">Place SP odds for 2nd and 3rd horses (needed for place/EW bets)</div>
+        <div class="form-grid" style="margin-bottom:0.875rem">
+          <div class="field-group" style="margin:0"><label class="field-label">2nd horse place SP</label><input class="inp" id="resSpPlace2" placeholder="e.g. 1.70" type="number" step="0.01"></div>
+          <div class="field-group" style="margin:0"><label class="field-label">3rd horse place SP</label><input class="inp" id="resSpPlace3" placeholder="e.g. 1.50" type="number" step="0.01"></div>
+        </div>
+        <button class="btn" onclick="saveResult()">Save Result & Settle Bets</button>
+        <div id="resultMsg" style="font-size:0.83rem;margin-top:0.75rem;display:none"></div>
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-title">Quick Links — Fields & Results</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:0.875rem">Open TAB or Racing Australia in a new tab to copy fields and SP results.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.75rem">
+        <a href="https://www.tab.com.au/racing/today" target="_blank" class="btn btn-sm" style="text-decoration:none">TAB — Today's Fields</a>
+        <a href="https://www.tab.com.au/racing/results" target="_blank" class="btn btn-sm" style="text-decoration:none">TAB — Today's Results & SP</a>
+        <a href="https://racingaustralia.horse/FreeFields/Calendar.aspx" target="_blank" class="btn btn-sm btn-gold" style="text-decoration:none">Racing Australia — Free Fields</a>
+        <a href="https://www.racenet.com.au/horse-racing/results" target="_blank" class="btn-outline btn-sm" style="text-decoration:none;display:inline-flex;align-items:center;padding:6px 14px;border:1px solid var(--border);border-radius:6px;color:var(--mid);font-size:0.82rem;font-weight:600">Racenet Results</a>
+      </div>
+      <div style="font-size:0.78rem;color:var(--muted);line-height:1.7">
+        <strong style="color:var(--mid)">Fields workflow:</strong> Open Racing Australia Free Fields → find the Group 1 race → copy runners into Add Runners above.<br>
+        <strong style="color:var(--mid)">Results workflow:</strong> Open TAB Results → find the race → note 1st/2nd/3rd and Win SP + Place SP → enter in Result form above.
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-title">Social Fund & Pool</div>
+      <div style="display:flex;gap:0.75rem;align-items:flex-end;flex-wrap:wrap">
+        <div class="field-group" style="margin:0"><label class="field-label">Social fund ($)</label><input class="inp" id="socialFundInp" type="number" style="width:140px" placeholder="0"></div>
+        <div class="field-group" style="margin:0"><label class="field-label">Total pool ($)</label><input class="inp" id="totalPoolInp" type="number" style="width:140px" placeholder="0"></div>
+        <button class="btn btn-sm btn-gold" onclick="updateFunds()">Update</button>
+        <div id="fundsMsg" style="font-size:0.83rem;display:none"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<script>
+const SB_URL='https://sdnvfcmbrbholuisqziw.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkbnZmY21icmJob2x1aXNxeml3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0OTg5MDMsImV4cCI6MjA5MDA3NDkwM30.-atgeoQm1hhL1PawRHmeB-6g08Ab924VLUlk-6z5IvQ';
+const ADMIN_PW='racing2026';
+let currentBets={};let raceDaysCache=[];let currentRaceDay=null;
+
+async function sb(path,opts={}){
+  const sep=path.includes('?')?'&':'?';
+  const url=`${SB_URL}/rest/v1/${path}${sep}apikey=${SB_KEY}`;
+  const headers={'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation'};
+  if(opts.headers)Object.assign(headers,opts.headers);
+  const res=await fetch(url,{method:opts.method||'GET',headers,body:opts.body});
+  const txt=await res.text();
+  if(!res.ok)throw new Error(txt);
+  return txt?JSON.parse(txt):[];
+}
+
+function isLocked(t){return new Date()>=new Date(t)}
+
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='leaderboard')loadLeaderboard();
+  if(id==='betting'){loadRaceDaySelects();loadPlayerSelects();}
+  if(id==='results'){loadRaceDaySelects();loadPlayerSelects();}
+  if(id==='admin')loadAdminSelects();
+}
+
+async function loadLeaderboard(){
+  try{
+    const [lb,settings,raceDays]=await Promise.all([
+      sb('leaderboard?order=total_return.desc'),
+      sb('comp_settings'),
+      sb('race_days?order=race_date.asc')
+    ]);
+    const sf=settings.find(s=>s.key==='social_fund')?.value||'0';
+    const pool=settings.find(s=>s.key==='total_pool')?.value||'0';
+    document.getElementById('socialFund').textContent='$'+Math.round(parseFloat(sf)||0).toLocaleString('en-AU');
+    document.getElementById('totalPool').textContent='$'+Math.round(parseFloat(pool)||0).toLocaleString('en-AU');
+    document.getElementById('raceDaysCount').textContent=raceDays.length;
+    if(!lb.length||!lb.some(p=>p.total_return>0)){
+      document.getElementById('leaderName').textContent='—';
+      document.getElementById('leaderReturn').textContent='Season not yet started';
+      document.getElementById('lbContent').innerHTML=`<div class="al al-info">No results yet — leaderboard updates after each race day is settled.</div>`;
+      return;
+    }
+    const leader=lb[0];
+    document.getElementById('leaderName').textContent=leader.player_name;
+    document.getElementById('leaderReturn').textContent=`$${Math.round(leader.total_return)} returns · ${leader.race_days_played} days`;
+    document.getElementById('lbContent').innerHTML=`<table class="lb-table"><thead><tr><th>#</th><th>Punter</th><th>Days</th><th>Wins</th><th>Total Returns</th><th>P&L</th></tr></thead><tbody>${
+      lb.map((p,i)=>{
+        const rank=i+1;
+        const rc=rank===1?'r1':rank===2?'r2':'rn';
+        const profit=(p.total_return||0)-(p.total_staked||0);
+        const pl=profit>=0?`<span class="profit-pos">+$${Math.round(profit)}</span>`:`<span class="profit-neg">-$${Math.round(Math.abs(profit))}</span>`;
+        return`<tr class="${rank===1?'leader':''}"><td><div class="rank-circle ${rc}">${rank}</div></td><td><strong>${p.player_name}</strong></td><td style="font-size:0.85rem;color:var(--muted)">${p.race_days_played||0}</td><td style="font-size:0.85rem;color:var(--muted)">${p.wins||0}</td><td><span class="big-return">$${Math.round(p.total_return||0)}</span></td><td>${pl}</td></tr>`;
+      }).join('')
+    }</tbody></table>`;
+  }catch(e){document.getElementById('lbContent').innerHTML=`<div class="al al-e">Error: ${e.message}</div>`;}
+}
+
+async function loadRaceDaySelects(){
+  try{
+    const days=await sb('race_days?order=race_date.asc');
+    raceDaysCache=days;
+    ['raceDaySel','resultsRaceDaySel','raceRaceDaySel','runnerRaceDaySel','resultRaceDaySel'].forEach(id=>{
+      const el=document.getElementById(id);if(!el)return;
+      el.innerHTML='<option value="">— select race day —</option>'+days.map(d=>`<option value="${d.id}">${d.name} · ${new Date(d.race_date+'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'})}</option>`).join('');
+    });
+  }catch(e){}
+}
+
+async function loadPlayerSelects(){
+  try{
+    const players=await sb('players?order=name.asc');
+    ['bettorSel','resultsBettorSel'].forEach(id=>{
+      const el=document.getElementById(id);if(!el)return;
+      const isFilter=id==='resultsBettorSel';
+      el.innerHTML=(isFilter?'<option value="">— all players —</option>':'<option value="">— select name —</option>')+players.map(p=>`<option value="${p.name}">${p.name}</option>`).join('');
+    });
+  }catch(e){}
+}
+
+async function loadBettingDay(){
+  const bettor=document.getElementById('bettorSel').value;
+  const pin=document.getElementById('bettorPin').value;
+  const dayId=document.getElementById('raceDaySel').value;
+  const cont=document.getElementById('bettingRaces');
+  const actions=document.getElementById('bettingActions');
+  const budgetBar=document.getElementById('budgetBar');
+  currentBets={};
+  if(!bettor||pin.length<4||!dayId){
+    cont.innerHTML='<div style="font-size:0.85rem;color:var(--muted)">Select your name, enter your PIN and choose a race day.</div>';
+    actions.style.display='none';budgetBar.style.display='none';return;
+  }
+  cont.innerHTML=`<div class="loading"><span class="spin"></span>Verifying PIN...</div>`;
+  try{
+    const players=await sb(`players?name=eq.${encodeURIComponent(bettor)}`);
+    if(!players.length||players[0].pin!==pin){
+      cont.innerHTML=`<div class="al al-e">Incorrect PIN. Please try again.</div>`;
+      actions.style.display='none';budgetBar.style.display='none';return;
+    }
+    const races=await sb(`races?race_day_id=eq.${dayId}&order=race_number.asc`);
+    if(!races.length){cont.innerHTML=`<div class="al al-w">No races added for this day yet.</div>`;actions.style.display='none';budgetBar.style.display='none';return;}
+    const ids=races.map(r=>`"${r.id}"`).join(',');
+    const [existingBets,allRunners]=await Promise.all([
+      sb(`bets?player_name=eq.${encodeURIComponent(bettor)}&race_id=in.(${ids})`),
+      sb(`runners?race_id=in.(${ids})&order=barrier.asc`)
+    ]);
+    existingBets.forEach(b=>{currentBets[b.race_id]={horse:b.horse_name,type:b.bet_type,stake:b.stake};});
+    let html='';
+    races.forEach(r=>{
+      const locked=isLocked(r.jump_time);
+      const bet=currentBets[r.id]||{};
+      const runners=allRunners.filter(ru=>ru.race_id===r.id);
+      const jumpStr=new Date(r.jump_time).toLocaleString('en-AU',{weekday:'short',hour:'numeric',minute:'2-digit',hour12:true});
+      const chip=locked?`<span class="chip chip-lock">LOCKED</span>`:r.result_1st?`<span class="chip chip-settled">SETTLED</span>`:`<span class="chip chip-open">OPEN</span>`;
+      const runnerBtns=runners.length?runners.map(ru=>`<button class="runner-btn ${ru.scratched?'runner-scratched':''} ${bet.horse===ru.horse_name?'selected':''}" onclick="selectRunner('${r.id}','${ru.horse_name.replace(/'/g,"\\'")}','${r.id}')"><div class="runner-name">${ru.horse_name}</div><div class="runner-barrier">No.${ru.barrier}${ru.jockey?' · '+ru.jockey:''}</div></button>`).join(''):`<div style="font-size:0.83rem;color:var(--muted)">Runners not yet declared — you can still enter a horse name below</div><input class="inp" id="manualHorse_${r.id}" placeholder="Enter horse name" value="${bet.horse||''}" oninput="manualHorse('${r.id}',this.value)" style="margin-top:0.5rem">`;
+      const betTypes=['Win','Place','EW'].map(t=>`<button class="bet-type-btn ${(bet.type||'Win')===t?'active':''}" onclick="setBetType('${r.id}','${t}')">${t}</button>`).join('');
+      html+=`<div class="race-card">
+        <div class="race-header"><div><div class="race-name">R${r.race_number} — ${r.name}</div><div class="race-meta">${jumpStr}</div></div>${chip}</div>
+        <div class="race-body" ${locked?'style="pointer-events:none;opacity:0.7"':''}>
+          <div class="runner-grid">${runnerBtns}</div>
+          <div class="bet-controls">
+            <div class="bet-type-btns">${betTypes}</div>
+            <div class="stake-wrap">
+              <span style="font-size:0.82rem;color:var(--muted)">Stake $</span>
+              <input class="stake-inp" id="stake_${r.id}" type="number" min="1" max="100" step="1" value="${bet.stake||''}" placeholder="0" oninput="updateStake('${r.id}',this.value)">
+            </div>
+            ${bet.horse?`<span style="font-size:0.78rem;color:var(--green);margin-left:auto;font-weight:600">✓ ${bet.horse}</span>`:''}
+          </div>
+        </div>
+      </div>`;
+    });
+    cont.innerHTML=html;
+    actions.style.display='block';budgetBar.style.display='block';
+    updateBudgetBar();
+  }catch(e){cont.innerHTML=`<div class="al al-e">Error: ${e.message}</div>`;}
+}
+
+function selectRunner(raceId,horseName){
+  currentBets[raceId]=currentBets[raceId]||{type:'Win',stake:0};
+  currentBets[raceId].horse=horseName;
+  document.querySelectorAll(`[onclick^="selectRunner('${raceId}"]`).forEach(b=>{
+    b.classList.toggle('selected',b.querySelector('.runner-name')?.textContent===horseName);
+  });
+}
+
+function manualHorse(raceId,val){
+  currentBets[raceId]=currentBets[raceId]||{type:'Win',stake:0};
+  currentBets[raceId].horse=val.trim();
+}
+
+function setBetType(raceId,type){
+  currentBets[raceId]=currentBets[raceId]||{};
+  currentBets[raceId].type=type;
+  document.querySelectorAll(`[onclick="setBetType('${raceId}','Win')"], [onclick="setBetType('${raceId}','Place')"], [onclick="setBetType('${raceId}','EW')"]`).forEach(b=>{
+    b.classList.toggle('active',b.textContent===type);
+  });
+}
+
+function updateStake(raceId,val){
+  currentBets[raceId]=currentBets[raceId]||{};
+  currentBets[raceId].stake=parseFloat(val)||0;
+  updateBudgetBar();
+}
+
+function updateBudgetBar(){
+  const total=Object.values(currentBets).reduce((s,b)=>s+(b.stake||0),0);
+  const pct=Math.min(100,(total/100)*100);
+  const fill=document.getElementById('budgetFill');
+  if(fill){fill.style.width=pct+'%';fill.className='budget-fill'+(total>100?' over':'');}
+  const used=document.getElementById('budgetUsed');const left=document.getElementById('budgetLeft');
+  if(used)used.textContent='$'+total.toFixed(0);
+  if(left){const rem=100-total;left.textContent='$'+rem.toFixed(0);left.style.color=rem<0?'#c0392b':'var(--green)';}
+}
+
+async function saveBets(){
+  const bettor=document.getElementById('bettorSel').value;
+  const dayId=document.getElementById('raceDaySel').value;
+  const msg=document.getElementById('bettingMsg');
+  const total=Object.values(currentBets).reduce((s,b)=>s+(b.stake||0),0);
+  if(Math.round(total)!==100){msg.innerHTML=`<div class="al al-w">Total stake must equal exactly $100. Currently $${total.toFixed(0)}.</div>`;return;}
+  try{
+    const races=await sb(`races?race_day_id=eq.${dayId}&order=race_number.asc`);
+    const unlocked=races.filter(r=>!isLocked(r.jump_time));
+    const missing=unlocked.filter(r=>!currentBets[r.id]?.horse||!currentBets[r.id]?.stake);
+    if(missing.length){msg.innerHTML=`<div class="al al-w">Must bet on all ${unlocked.length} races. ${missing.length} still incomplete.</div>`;return;}
+    const upserts=unlocked.filter(r=>currentBets[r.id]?.horse).map(r=>({
+      player_name:bettor,race_id:r.id,horse_name:currentBets[r.id].horse,
+      bet_type:currentBets[r.id].type||'Win',stake:currentBets[r.id].stake
+    }));
+    await sb('bets?on_conflict=player_name,race_id',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify(upserts)});
+    // Update leaderboard
+    const existing=(await sb(`leaderboard?player_name=eq.${encodeURIComponent(bettor)}`))[0];
+    if(existing){
+      await sb(`leaderboard?player_name=eq.${encodeURIComponent(bettor)}`,{method:'PATCH',body:JSON.stringify({total_staked:(existing.total_staked||0)+100,race_days_played:(existing.race_days_played||0)+1})});
+    }else{
+      await sb('leaderboard',{method:'POST',body:JSON.stringify({player_name:bettor,total_return:0,total_staked:100,race_days_played:1,wins:0,places:0})});
+    }
+    msg.innerHTML=`<div class="al al-s">✓ ${upserts.length} bets locked in for ${bettor}! Good luck.</div>`;
+  }catch(e){msg.innerHTML=`<div class="al al-e">Error: ${e.message}</div>`;}
+}
+
+async function loadResults(){
+  const dayId=document.getElementById('resultsRaceDaySel').value;
+  const player=document.getElementById('resultsBettorSel').value;
+  const cont=document.getElementById('resultsContent');
+  if(!dayId){cont.innerHTML='<div style="font-size:0.85rem;color:var(--muted)">Select a race day.</div>';return;}
+  cont.innerHTML=`<div class="loading"><span class="spin"></span>Loading...</div>`;
+  try{
+    const races=await sb(`races?race_day_id=eq.${dayId}&order=race_number.asc`);
+    if(!races.length){cont.innerHTML='<div class="al al-w">No races for this day.</div>';return;}
+    const ids=races.map(r=>`"${r.id}"`).join(',');
+    const bets=await sb(player?`bets?race_id=in.(${ids})&player_name=eq.${encodeURIComponent(player)}`:`bets?race_id=in.(${ids})`);
+    let html='';
+    races.forEach(r=>{
+      const rb=bets.filter(b=>b.race_id===r.id);
+      const settled=!!r.result_1st;
+      const jumpStr=new Date(r.jump_time).toLocaleString('en-AU',{weekday:'short',hour:'numeric',minute:'2-digit',hour12:true});
+      html+=`<div class="card" style="margin-bottom:1rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem">
+          <div><div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700">R${r.race_number} ${r.name}</div><div style="font-size:0.78rem;color:var(--muted)">${jumpStr}</div></div>
+          ${settled?`<div class="podium"><div class="podium-place">🥇 <strong>${r.result_1st}</strong></div>${r.result_2nd?`<div class="podium-place">🥈 <strong>${r.result_2nd}</strong></div>`:''}</div>`:`<span class="chip chip-open">Awaiting result</span>`}
+        </div>
+        ${rb.length?`<div style="display:flex;flex-direction:column;gap:4px">${rb.map(b=>{
+          const won=settled&&b.horse_name.toLowerCase()===r.result_1st?.toLowerCase();
+          const placed=settled&&[r.result_1st,r.result_2nd,r.result_3rd].filter(Boolean).map(x=>x.toLowerCase()).includes(b.horse_name.toLowerCase());
+          const ret=b.return_amount||0;
+          return`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.05)">
+            <div><span style="font-weight:600;font-size:0.88rem">${b.player_name}</span><span style="font-size:0.82rem;color:var(--muted);margin-left:8px">${b.horse_name} · $${b.stake} ${b.bet_type}</span></div>
+            <div>${settled?`<span class="${ret>0?'profit-pos':'profit-neg'}">${ret>0?'$'+ret.toFixed(2):'$0.00'}</span>`:'<span style="color:var(--muted);font-size:0.82rem">pending</span>'}</div>
+          </div>`;}).join('')}</div>`:'<div style="font-size:0.83rem;color:var(--muted)">No bets recorded</div>'}
+      </div>`;
+    });
+    cont.innerHTML=html;
+  }catch(e){cont.innerHTML=`<div class="al al-e">Error: ${e.message}</div>`;}
+}
+
+async function registerPlayer(){
+  const name=document.getElementById('regName').value.trim();
+  const pin=document.getElementById('regPin').value;
+  const pin2=document.getElementById('regPin2').value;
+  const msg=document.getElementById('regMsg');
+  msg.style.display='block';
+  if(!name||!pin){msg.style.color='#8b1a1a';msg.textContent='Fill in all fields.';return;}
+  if(pin!==pin2){msg.style.color='#8b1a1a';msg.textContent='PINs do not match.';return;}
+  if(pin.length!==4||!/^\d+$/.test(pin)){msg.style.color='#8b1a1a';msg.textContent='PIN must be exactly 4 digits.';return;}
+  try{
+    await sb('players',{method:'POST',body:JSON.stringify({name,pin})});
+    await sb('leaderboard',{method:'POST',body:JSON.stringify({player_name:name,total_return:0,total_staked:0,race_days_played:0,wins:0,places:0})});
+    msg.style.color='var(--green)';msg.textContent=`✓ Welcome ${name}! Go to Place Bets to get started.`;
+    document.getElementById('regName').value='';document.getElementById('regPin').value='';document.getElementById('regPin2').value='';
+    loadPlayerSelects();
+  }catch(e){
+    msg.style.color='#8b1a1a';
+    msg.textContent=e.message.includes('unique')?'That name is already taken.':'Error: '+e.message;
+  }
+}
+
+function checkAdmin(){
+  if(document.getElementById('adminPass').value===ADMIN_PW){
+    document.getElementById('adminLock').style.display='none';
+    document.getElementById('adminContent').style.display='block';
+    loadAdminSelects();
+  }else{document.getElementById('adminPassMsg').style.display='block';}
+}
+
+async function loadAdminSelects(){await loadRaceDaySelects();}
+
+async function saveRaceDay(){
+  const name=document.getElementById('rdName').value.trim();
+  const venue=document.getElementById('rdVenue').value.trim();
+  const date=document.getElementById('rdDate').value;
+  const msg=document.getElementById('rdMsg');
+  if(!name||!venue||!date){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='Fill in all fields.';return;}
+  try{
+    await sb('race_days',{method:'POST',body:JSON.stringify({name,venue,race_date:date})});
+    msg.style.display='block';msg.style.color='var(--green)';msg.textContent=`✓ ${name} added!`;
+    document.getElementById('rdName').value='';document.getElementById('rdVenue').value='';document.getElementById('rdDate').value='';
+    await loadRaceDaySelects();
+    // Recalculate pool
+    const [days,players]=await Promise.all([sb('race_days'),sb('players')]);
+    const pool=days.length*players.length*20;
+    const social=Math.max(0,pool-1000);
+    await sb('comp_settings?key=eq.total_pool',{method:'PATCH',body:JSON.stringify({value:String(pool)})});
+    await sb('comp_settings?key=eq.social_fund',{method:'PATCH',body:JSON.stringify({value:String(social)})});
+    document.getElementById('totalPool').textContent='$'+pool.toLocaleString('en-AU');
+    document.getElementById('socialFund').textContent='$'+social.toLocaleString('en-AU');
+  }catch(e){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='Error: '+e.message;}
+}
+
+async function saveRace(){
+  const dayId=document.getElementById('raceRaceDaySel').value;
+  const name=document.getElementById('raceName').value.trim();
+  const num=parseInt(document.getElementById('raceNum').value);
+  const jump=document.getElementById('raceJump').value;
+  const msg=document.getElementById('raceMsg');
+  if(!dayId||!name||!num||!jump){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='Fill in all fields.';return;}
+  try{
+    await sb('races',{method:'POST',body:JSON.stringify({race_day_id:dayId,name,race_number:num,jump_time:new Date(jump).toISOString()})});
+    msg.style.display='block';msg.style.color='var(--green)';msg.textContent=`✓ ${name} added!`;
+    document.getElementById('raceName').value='';document.getElementById('raceNum').value='';document.getElementById('raceJump').value='';
+  }catch(e){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='Error: '+e.message;}
+}
+
+function addRunnerRow(){
+  const row=document.createElement('div');
+  row.className='runner-row';
+  row.style.cssText='display:grid;grid-template-columns:60px 1fr 1fr auto;gap:0.5rem;align-items:center;margin-bottom:0.5rem';
+  row.innerHTML=`<input class="inp" placeholder="No." type="number" min="1" max="24"><input class="inp" placeholder="Horse name"><input class="inp" placeholder="Jockey"><button class="btn-outline btn-sm" onclick="this.closest('.runner-row').remove()">✕</button>`;
+  document.getElementById('runnerRows').appendChild(row);
+}
+
+async function loadRacesForRunners(){
+  const dayId=document.getElementById('runnerRaceDaySel').value;
+  const sel=document.getElementById('runnerRaceSel');
+  if(!dayId){sel.innerHTML='<option value="">— select race —</option>';return;}
+  const races=await sb(`races?race_day_id=eq.${dayId}&order=race_number.asc`);
+  sel.innerHTML='<option value="">— select race —</option>'+races.map(r=>`<option value="${r.id}">R${r.race_number} ${r.name}</option>`).join('');
+}
+
+async function saveRunners(){
+  const raceId=document.getElementById('runnerRaceSel').value;
+  const msg=document.getElementById('runnerMsg');
+  if(!raceId){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='Select a race first.';return;}
+  const rows=document.querySelectorAll('.runner-row');
+  const runners=[];
+  rows.forEach(r=>{
+    const inputs=r.querySelectorAll('input');
+    const barrier=parseInt(inputs[0].value);
+    const horse=inputs[1].value.trim();
+    const jockey=inputs[2].value.trim();
+    if(horse&&barrier)runners.push({race_id:raceId,horse_name:horse,barrier,jockey:jockey||null});
+  });
+  if(!runners.length){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='No valid runners.';return;}
+  try{
+    await sb('runners',{method:'POST',body:JSON.stringify(runners)});
+    msg.style.display='block';msg.style.color='var(--green)';msg.textContent=`✓ ${runners.length} runners saved!`;
+  }catch(e){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='Error: '+e.message;}
+}
+
+async function loadRacesForResults(){
+  const dayId=document.getElementById('resultRaceDaySel').value;
+  const sel=document.getElementById('resultRaceSel');
+  if(!dayId){sel.innerHTML='<option value="">— select race —</option>';return;}
+  const races=await sb(`races?race_day_id=eq.${dayId}&order=race_number.asc`);
+  sel.innerHTML='<option value="">— select race —</option>'+races.map(r=>`<option value="${r.id}">R${r.race_number} ${r.name}${r.result_1st?' ✓':''}</option>`).join('');
+}
+
+function showResultForm(){
+  const raceId=document.getElementById('resultRaceSel').value;
+  document.getElementById('resultForm').style.display=raceId?'block':'none';
+}
+
+async function saveResult(){
+  const raceId=document.getElementById('resultRaceSel').value;
+  const r1=document.getElementById('res1st').value.trim();
+  const r2=document.getElementById('res2nd').value.trim();
+  const r3=document.getElementById('res3rd').value.trim();
+  const spWin=parseFloat(document.getElementById('resSpWin').value)||0;
+  const spPlace=parseFloat(document.getElementById('resSpPlace').value)||0;
+  const spPlace2=parseFloat(document.getElementById('resSpPlace2').value)||0;
+  const spPlace3=parseFloat(document.getElementById('resSpPlace3').value)||0;
+  const msg=document.getElementById('resultMsg');
+  if(!raceId||!r1||!spWin){msg.style.display='block';msg.style.color='#8b1a1a';msg.textContent='Race, winner and SP win odds are required.';return;}
+  msg.style.display='block';msg.style.color='var(--muted)';msg.textContent='Saving and settling bets...';
+  try{
+    await sb(`races?id=eq.${raceId}`,{method:'PATCH',body:JSON.stringify({result_1st:r1,result_2nd:r2,result_3rd:r3})});
+    const bets=await sb(`bets?race_id=eq.${raceId}&settled=eq.false`);
+    for(const b of bets){
+      const horse=b.horse_name.toLowerCase();
+      const isWin=horse===r1.toLowerCase();
+      const is2nd=r2&&horse===r2.toLowerCase();
+      const is3rd=r3&&horse===r3.toLowerCase();
+      const isPlace=isWin||is2nd||is3rd;
+      const placeOdds=isWin?spPlace:is2nd?spPlace2:is3rd?spPlace3:0;
+      let ret=0;
+      if(b.bet_type==='Win'&&isWin) ret=b.stake*spWin;
+      else if(b.bet_type==='Place'&&isPlace) ret=b.stake*placeOdds;
+      else if(b.bet_type==='EW'){
+        if(isWin) ret=(b.stake/2)*spWin+(b.stake/2)*placeOdds;
+        else if(isPlace) ret=(b.stake/2)*placeOdds;
+      }
+      ret=Math.round(ret*100)/100;
+      await sb(`bets?id=eq.${b.id}`,{method:'PATCH',body:JSON.stringify({return_amount:ret,settled:true})});
+      const lb=(await sb(`leaderboard?player_name=eq.${encodeURIComponent(b.player_name)}`))[0]||{total_return:0,wins:0,places:0};
+      await sb(`leaderboard?player_name=eq.${encodeURIComponent(b.player_name)}`,{method:'PATCH',body:JSON.stringify({
+        total_return:Math.round(((lb.total_return||0)+ret)*100)/100,
+        wins:(lb.wins||0)+(isWin?1:0),
+        places:(lb.places||0)+(!isWin&&isPlace?1:0)
+      })});
+    }
+    msg.style.color='var(--green)';msg.textContent=`✓ Result saved. ${bets.length} bets settled for ${r1}.`;
+    document.getElementById('res1st').value='';document.getElementById('res2nd').value='';document.getElementById('res3rd').value='';
+    document.getElementById('resSpWin').value='';document.getElementById('resSpPlace').value='';
+    document.getElementById('resSpPlace2').value='';document.getElementById('resSpPlace3').value='';
+  }catch(e){msg.style.color='#8b1a1a';msg.textContent='Error: '+e.message;}
+}
+
+async function updateFunds(){
+  const sf=document.getElementById('socialFundInp').value;
+  const pool=document.getElementById('totalPoolInp').value;
+  const msg=document.getElementById('fundsMsg');
+  try{
+    if(sf)await sb('comp_settings?key=eq.social_fund',{method:'PATCH',body:JSON.stringify({value:String(sf)})});
+    if(pool)await sb('comp_settings?key=eq.total_pool',{method:'PATCH',body:JSON.stringify({value:String(pool)})});
+    msg.style.display='inline';msg.style.color='var(--green)';msg.textContent='✓ Updated!';
+    if(sf)document.getElementById('socialFund').textContent='$'+Math.round(parseFloat(sf)).toLocaleString('en-AU');
+    if(pool)document.getElementById('totalPool').textContent='$'+Math.round(parseFloat(pool)).toLocaleString('en-AU');
+    setTimeout(()=>msg.style.display='none',2000);
+  }catch(e){msg.style.display='inline';msg.style.color='#8b1a1a';msg.textContent='Error: '+e.message;}
+}
+
+loadLeaderboard();
+loadRaceDaySelects();
+loadPlayerSelects();
+</script>
+</body>
+</html>
